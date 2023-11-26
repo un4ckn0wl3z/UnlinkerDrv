@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UnlinkerClass</class>
+ <widget class="QMainWindow" name="UnlinkerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>358</width>
+    <height>105</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>358</width>
+    <height>105</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>358</width>
+    <height>105</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Unlinker</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="pidLabel">
+        <property name="text">
+         <string>PID:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="pidLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="hideButton">
+        <property name="text">
+         <string>Hide</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>358</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout_Unlinker"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAbout_Unlinker">
+   <property name="text">
+    <string>About Unlinker</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="Unlinker.qrc"/>
+ </resources>
+ <connections/>
+</ui>

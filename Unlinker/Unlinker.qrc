@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Unlinker">
+        <file>assets/1608708_unlink_icon.png</file>
+    </qresource>
+</RCC>

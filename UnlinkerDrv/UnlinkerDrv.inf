@@ -1,0 +1,77 @@
+;
+; UnlinkerDrv.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=UnlinkerDrv.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+UnlinkerDrv_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+UnlinkerDrv.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%UnlinkerDrv.DeviceDesc%=UnlinkerDrv_Device, Root\UnlinkerDrv ; TODO: edit hw-id
+
+[UnlinkerDrv_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+UnlinkerDrv.sys
+
+;-------------- Service installation
+[UnlinkerDrv_Device.NT.Services]
+AddService = UnlinkerDrv,%SPSVCINST_ASSOCSERVICE%, UnlinkerDrv_Service_Inst
+
+; -------------- UnlinkerDrv driver install sections
+[UnlinkerDrv_Service_Inst]
+DisplayName    = %UnlinkerDrv.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\UnlinkerDrv.sys
+
+;
+;--- UnlinkerDrv_Device Coinstaller installation ------
+;
+
+[UnlinkerDrv_Device.NT.CoInstallers]
+AddReg=UnlinkerDrv_Device_CoInstaller_AddReg
+CopyFiles=UnlinkerDrv_Device_CoInstaller_CopyFiles
+
+[UnlinkerDrv_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[UnlinkerDrv_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[UnlinkerDrv_Device.NT.Wdf]
+KmdfService =  UnlinkerDrv, UnlinkerDrv_wdfsect
+[UnlinkerDrv_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "UnlinkerDrv Installation Disk"
+UnlinkerDrv.DeviceDesc = "UnlinkerDrv Device"
+UnlinkerDrv.SVCDESC = "UnlinkerDrv Service"
